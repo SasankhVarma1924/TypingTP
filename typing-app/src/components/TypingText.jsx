@@ -17,8 +17,8 @@ function shuffleArray(array)
 }
 
 // words
-var words = "some her would make like him into time has look two more write go see number no way could people my than first water been call who oil its now find long down day did get come made may part ".split(' ')
-words = shuffleArray(words);
+var wordsData = "the of and a to in is you that it he was for on are as with his they i at be this have from or one had by word but not what all were we when your can said there use an each which she do how their if will up other about out many then them these so some her would make like him into time has look two more write go see number no way could people my than first water been call who oil its now find long down day did get come made may part over new sound take only little work know place year live me back give most very after thing our just name man think".split(' ')
+var words = shuffleArray(wordsData).slice(0, 37);
 
 function TypingText()
 {
@@ -36,6 +36,7 @@ function TypingText()
   const cursorRef = useRef(null);
   const [correct, setCorrect] = useState(0);
   const timerButtonRefs = useRef({});
+  const noOfWordsToGen = {"15" : 37, "30" : 75, "60" : 150};
 
   // handling different timestamps
   useEffect(() =>
@@ -89,7 +90,7 @@ function TypingText()
       // calculating wpm
       let timeTaken = time.current / 60;
       let wpm = ((correct / 5) / timeTaken).toFixed(1);
-      WPMRef.current.innerHTML = `WPM : ${wpm}`;
+      WPMRef.current.innerHTML = `&nbsp;${wpm}`;
       setStop(true);
       clearInterval(interval);
     }
@@ -101,14 +102,18 @@ function TypingText()
   {
     const handleKeyDown1 = (event)=>
     {
-      if(timer > 0)
+      const key = event.key;
+      if(/^[a-zA-Z\s]$/.test(key))
       {
-        setStop(false);
+        if(timer > 0)
+        {
+          setStop(false);
+        }
       }
     }
     window.addEventListener("keydown", handleKeyDown1);
     return () => window.removeEventListener("keydown", handleKeyDown1);
-  }, [stop, restartButtonRef, timer]);
+  }, [stop, timer]);
 
   // handling both input and validating the entered text
   useEffect(() =>
@@ -131,7 +136,7 @@ function TypingText()
               }
               lettersRefs.current[currentIndex].style.borderBottom = "none"
               lettersRefs.current[currentIndex].style.borderBottomColor = "none";
-              lettersRefs.current[currentIndex].style.color = "hsl(0, 0%, 44%)";
+              lettersRefs.current[currentIndex].style.color = "#939eae";
               lettersRefs.current[currentIndex].name = "none";
               setCurrentIndex(i => i - 1);
             }
@@ -139,7 +144,7 @@ function TypingText()
           else if(key === letter)
           {
             lettersRefs.current[currentIndex + 1].name = "correct";
-            lettersRefs.current[currentIndex + 1].style.color = "#F4CE14";
+            lettersRefs.current[currentIndex + 1].style.color = "white";
             setCurrentIndex(i => i + 1);
             setCorrect(c => c + 1);
           }
@@ -168,7 +173,7 @@ function TypingText()
     }
   }, [currentIndex, timer]);
 
-  // getting the position of the current character in the window 
+  // getting the position / coordinates of the current character in the window 
   useEffect(() =>
   {
     if(lettersRefs.current[currentIndex + 1])
@@ -183,15 +188,15 @@ function TypingText()
   {
     const hadleResartButton = (event) =>
     {
-      words = shuffleArray(words);
-      let newLetters = (words.join(" ") + " ").split('');
-      resetLetterStyles();
+      words = shuffleArray(wordsData).slice(0, noOfWordsToGen[time.current.toString()]);
+      newLetters = (words.join(" ") + " ").split('');
       setLetters(newLetters)
       setCurrentIndex(-1);
       restartButtonRef.current.blur();
       textRef.current.focus();
       setTimer(time.current);
       setCorrect(0);
+      resetLetterStyles();
       setStop(true);
     }
     restartButtonRef.current.addEventListener("click", hadleResartButton);
@@ -207,7 +212,7 @@ function TypingText()
   {
     Object.values(lettersRefs.current).forEach(letter => 
     {
-      letter.style.color = "hsl(0, 0%, 44%)";
+      letter.style.color = "#939eae";
       letter.style.borderBottom = "none"
       letter.style.borderBottomColor = "none";
     })
@@ -217,7 +222,7 @@ function TypingText()
     <>
 
       <div style={{display:"flex", justifyContent:"center", alignItems:"center", paddingTop:"5em"}}>
-        <div className="changeTimer">
+        <div className="changeTimer" style={{backgroundColor: "#2e343d"}}>
           <button className="changeTimerButtons" ref={r => (timerButtonRefs.current[0] = r)}>15</button>
           <button className="changeTimerButtons" ref={r => (timerButtonRefs.current[1] = r)}>30</button>
           <button className="changeTimerButtons" ref={r => (timerButtonRefs.current[2] = r)}>60</button>
@@ -230,7 +235,7 @@ function TypingText()
         }
       } ref={cursorRef}></span>
 
-      <span  style={{color: "white", fontSize : "2.5em", fontFamily: "monospace", paddingLeft: "3.5em", display: "block"}}>{timer}</span>
+      <span  style={{color: "#f44c7f", fontSize : "2.5em", fontFamily: "monospace", paddingLeft: "3.5em", display: "block"}}>{timer}</span>
       
       <div ref = {textRef} className="textContainer">
         {
@@ -247,7 +252,11 @@ function TypingText()
       <br />
 
       <button ref ={restartButtonRef} className="restartButton"><img src={restartImage} className="restartImage" alt="restartimg" width="40px"/></button>
-      <h1 className="WPM" ref={WPMRef}>WPM : --</h1>
+      <div className="WPM" style={{display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center"}}> 
+        <h3 style={{color:"#939eae"}}>WPM :</h3> 
+        <h3 ref={WPMRef} style={{color:"#f44c7f"}}>&nbsp;--</h3>
+      </div>
+
     </>
   );
 }

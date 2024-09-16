@@ -1,6 +1,6 @@
 :root
 {
-  background-color: rgb(45, 45, 47);
+  background-color: #333a45;
   --translateX : 120px;
   --translateY : 248px;
 }
@@ -19,7 +19,7 @@
 .changeTimerButtons
 {
   background-color: none;
-  color: hsl(0, 0%, 44%);
+  color: #ffffff;
   font-size: 1.3em;
   font-family: monospace;
   padding-top: 5px;
@@ -34,13 +34,13 @@
 
 .changeTimerButtons:hover
 {
-  color: white;
+  color: #f44c7f;
 }
 
 .displaytext
 {
   position: relative;
-  color: #707070;
+  color: #939eae;
   font-size: 2.5em;
   padding-right: 0.5px;
   font-family: monospace;
@@ -61,7 +61,7 @@
   width: 2px;
   height: 40px;
   position: fixed;
-  background-color: #F4CE14;
+  background-color: #f44c7f;
   border-radius: 5px;
   transition: transform 0.15s ease-out;
   z-index: 9999;
@@ -70,7 +70,7 @@
 
 .restartButton
 {
-  background-color: hsl(220, 3%, 18%);
+  background-color: #333a45;
   cursor: pointer;
   border: none;
   display: block;
@@ -84,7 +84,6 @@
 
 .WPM
 {
-  color: white;
   font-size: 2.5em;
   font-family: monospace;
   display: block;

@@ -2,7 +2,7 @@ import TypingText from "./components/TypingText.jsx"
 import "./components/style.css"
 function App()
 {
-  document.title = "Typing Website";
+  document.title = "TypingTP";
   return (
     <>
       <TypingText/>
