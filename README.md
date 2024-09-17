@@ -6,6 +6,6 @@ TypingTP is a web-based typing test application designed to help users improve t
 
 ## Technologies Used
 
-- **Frontend**: React with Vite for fast and efficient development.
-- **Backend**: Express.js for handling API requests and serving static files.
-- **Database**: MongoDB Atlas for storing user data and test results.
+- **Frontend**: React with Vite.
+- **Backend**: Express.js.
+- **Database**: MongoDB Atlas.
