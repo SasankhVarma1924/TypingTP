@@ -1,6 +1,7 @@
-import React, {useState, useRef, useEffect} from "react"
+import React, {useState, useRef, useEffect, useContext} from "react"
 import "./style.css";
 import restartImage from '../assets/restart.png';
+import { UserContext } from "../GlobalState";
 
 // shuffle array
 function shuffleArray(array) 
@@ -37,6 +38,7 @@ function TypingText()
   const [correct, setCorrect] = useState(0);
   const timerButtonRefs = useRef({});
   const noOfWordsToGen = {"15" : 37, "30" : 75, "60" : 150};
+  const {username, isLoggedIn, userTypingDetails, setUserTypingDetails} = useContext(UserContext);
 
   // handling different timestamps
   useEffect(() =>
@@ -77,6 +79,21 @@ function TypingText()
   // timer countdown
   useEffect(() =>
   {
+    const updateDetails = async () =>
+    {
+      const respone = await fetch(`http://localhost:5000/account/userdetails/${username}`,
+        {
+          method:"PUT",
+          headers:{"Content-type" : "application/json"},
+          body : JSON.stringify(userTypingDetails)
+        }
+      )
+      const res = await respone.json();
+      if(!res.success)
+      {
+        console.log(res.msg);
+      }
+    }
     let interval;
     if(stop === false && timer > 0)
     {
@@ -89,8 +106,16 @@ function TypingText()
     {
       // calculating wpm
       let timeTaken = time.current / 60;
-      let wpm = ((correct / 5) / timeTaken).toFixed(1);
-      WPMRef.current.innerHTML = `&nbsp;${wpm}`;
+      let WPM = parseFloat(((correct / 5) / timeTaken).toFixed(1));
+      WPMRef.current.innerHTML = `&nbsp;${WPM}`;
+      if(isLoggedIn)
+      {
+        const prevTests = parseInt(userTypingDetails.tests);
+        const prevWpm = parseFloat(userTypingDetails.wpm);
+        const newWpm = parseFloat((((prevWpm * prevTests) + WPM) / (prevTests + 1)).toFixed(1));
+        setUserTypingDetails({tests: prevTests + 1, wpm : newWpm});
+        updateDetails();
+      }
       setStop(true);
       clearInterval(interval);
     }

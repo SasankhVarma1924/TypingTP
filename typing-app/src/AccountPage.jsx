@@ -7,24 +7,20 @@ import "./index.css"
 
 function AccountPage()
 {
-  const {username} = useContext(UserContext);
+  const {username, userTypingDetails, setUserTypingDetails} = useContext(UserContext);
   const navigate = useNavigate();
   const {isLoggedIn} = useContext(UserContext);
-  const [tests, setTests] = useState(0);
-  const [wpm, setWpm] = useState(0);
 
-  useEffect(() => {
-    const getUserDetails = async () =>
-    {
-      const response = await fetch(`http://localhost:5000/account/userDetails/${username}`, {
-        method:"GET"
-      })
-      const userDetails = await response.json();
-      setTests(userDetails.tests);
-      setWpm(userDetails.wpm);
-    }
-    getUserDetails();
-  }, []);
+  const getUserDetails = async () =>
+  {
+    const response = await fetch(`http://localhost:5000/account/userdetails/${username}`, {
+      method:"GET"
+    })
+    const userDetails = await response.json();
+    setUserTypingDetails({tests: userDetails.tests, wpm: userDetails.wpm});
+  }
+  
+  getUserDetails();
 
   const handleLoginPageOnClick = () =>
   {
@@ -64,14 +60,14 @@ function AccountPage()
 
         <div style={{display:"flex", flexDirection:"column", margin:"auto"}}>
           <p className="typingTestsHeading">Tests Completed</p>
-          <span className="typingTestValue">{tests}</span>
+          <span className="typingTestValue">{userTypingDetails.tests}</span>
         </div>
 
         <span className="divider"/>
 
         <div style={{display:"flex", flexDirection:"column", margin:"auto"}}>
           <p className="typingTestsHeading">WPM</p>
-          <span className="typingTestValue">{wpm}</span>
+          <span className="typingTestValue">{userTypingDetails.wpm}</span>
         </div>
 
       </div>
