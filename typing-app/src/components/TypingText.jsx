@@ -221,7 +221,7 @@ function TypingText()
   return (
     <>
 
-      <div style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop:"10px"}}>
+      <div style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop:"40px"}}>
         <div className="changeTimer" style={{backgroundColor: "#2e343d"}}>
           <button className="changeTimerButtons" ref={r => (timerButtonRefs.current[0] = r)}>15</button>
           <button className="changeTimerButtons" ref={r => (timerButtonRefs.current[1] = r)}>30</button>

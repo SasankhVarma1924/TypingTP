@@ -2,9 +2,12 @@ import TypingText from "./components/TypingText.jsx"
 import "./index.css"
 import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "./GlobalState.jsx";
+import { useContext } from "react";
 
 function HomePage()
 {
+  const {isLoggedIn} = useContext(UserContext);
   const navigate = useNavigate();
   
   const handleLoginPageOnClick = () =>
@@ -13,7 +16,14 @@ function HomePage()
     typingTextContainer.classList.add("fade-out");
     setTimeout(() =>
     {
-      navigate('/login');
+      if(isLoggedIn)
+      {
+        navigate("/account");
+      }
+      else
+      {
+        navigate('/login');
+      }
     }, 250);
   }
 

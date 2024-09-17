@@ -33,19 +33,22 @@ const connectToDatabase = async () => {
 };
 connectToDatabase();
 
-const UserDetailCollection = mongoose.connection.collection("userdetails");
+const UserDetailsCollection = mongoose.connection.collection("userdetails");
 
 app.post("/login/signup", (req, res) =>
 {
   const userData = req.body;
-  UserDetailCollection.insertOne(userData);
+  userData["tests"] = 0;
+  userData["wpm"] = 0.0;
+  console.log(userData)
+  UserDetailsCollection.insertOne(userData);
   res.json({success: true, msg: "Account Created"});
 })
 
 app.post("/login/signin", async (req, res) =>
 {
   const userData = req.body;
-  const user = await UserDetailCollection.findOne(userData);
+  const user = await UserDetailsCollection.findOne(userData);
   if(user)
   {
     res.json({success: true, msg: "Successfully Logged In"});
@@ -54,6 +57,15 @@ app.post("/login/signin", async (req, res) =>
   {
     res.json({success: false, msg: "Check UserName and Password"});
   }
+})
+
+app.get("/account/userdetails/:uname", async (req, res) =>
+{
+  const uname = req.params.uname;
+  const userDetails = await UserDetailsCollection.findOne({username: uname});
+  delete userDetails.password;
+  delete userDetails._id;
+  res.json(userDetails);
 })
 
 app.listen(5000, () => {console.log("listeneing at port 5000")});

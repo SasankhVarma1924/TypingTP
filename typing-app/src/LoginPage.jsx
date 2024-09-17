@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./index.css"
 import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "./GlobalState";
 
 function LoginPage()
 {
+  const {setUsername, setIsLoggedIn} = useContext(UserContext);
   const navigate = useNavigate();
   
   const handleLoginPageOnClick = () =>
@@ -54,6 +56,17 @@ function LoginPage()
         body: JSON.stringify(user)
     });
     const res = await response.json();
+    if(res.success)
+    {
+      setIsLoggedIn(true);
+      setUsername(uname);
+
+      const loginPageContainer = document.querySelector(".loginPageContainer");
+      loginPageContainer.classList.add("fade-out");
+      setTimeout(() => {
+        navigate("/account");
+      }, 250);
+    }
     console.log(res.msg);
   }
 
@@ -65,9 +78,9 @@ function LoginPage()
         <FaRegUser className="loginPageIcon" size={20} onClick={handleLoginPageOnClick}/>
       </div>
 
-      <div className="loginPageContainer">
+      <div className="loginPageContainer" style={{ marginTop:"40px"}}>
 
-        <div style={{display:"flex", alignItems:"center", flexDirection:"column", marginTop:"40px"}}>
+        <div style={{display:"flex", alignItems:"center", flexDirection:"column"}}>
           <input className="loginForm" type="text" id="username" name="username" placeholder="username"/>
           <input className="loginForm" type="text" id="password" name="password" placeholder="password"/>
         </div>

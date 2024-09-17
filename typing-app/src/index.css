@@ -25,7 +25,7 @@
 {
   background-color: #2e343d;
   border: 1px solid #333a45;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 6px;
   margin: auto;
   margin-bottom: 5px;
@@ -45,7 +45,7 @@
 
 .loginButtons
 {
-  border-radius: 5px;
+  border-radius: 10px;
   padding-left: 19px;
   padding-right: 19px;
   padding-top: 6px;
@@ -85,4 +85,48 @@
 .loginPageContainer.fade-out
 {
   opacity: 0;
+}
+
+.accountPageContainer
+{
+  margin-left: 8%;
+  margin-right: 8%;
+  display:flex;
+  background-color: #2e343d;
+  border-radius: 10px;
+  opacity: 1;
+  transition: opacity 0.25s ease-out;
+}
+
+.accountPageContainer.fade-out
+{
+  opacity: 0;
+}
+
+.divider
+{
+  margin-left:10px;
+  width:7px;
+  height:90px;
+  background-color:#333a45;
+  align-self:center;
+  border-radius:5px;
+}
+
+.typingTestsHeading
+{
+  font-family:monospace;
+  font-size: 1.5em;
+  align-self:center;
+  color:#939eae;
+  margin:none;
+}
+
+.typingTestValue
+{
+  font-family:monospace;
+  font-size: 2em;
+  align-self:center;
+  color:white;
+  margin-bottom:15px;
 }

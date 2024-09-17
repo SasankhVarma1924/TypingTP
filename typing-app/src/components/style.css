@@ -1,14 +1,12 @@
 :root
 {
   background-color: #333a45;
-  --translateX : 120px;
-  --translateY : 248px;
 }
 
 .changeTimer
 {
   display: inline-block;
-  background-color: rgb(40 40 41);
+  background-color: #2e343d;
   border-radius: 10px;
   padding-left: 10px;
   padding-right: 10px;
