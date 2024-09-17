@@ -23,7 +23,6 @@ app.use(express.static(path.join(__rootdir, 'dist')));
 // }));
 
 const mongoURI = "mongodb+srv://<username>:<password>@cluster0.wqosx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-
 const connectToDatabase = async () => {
   try {
     // Connect to MongoDB Atlas
