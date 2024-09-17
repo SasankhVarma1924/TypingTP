@@ -62,15 +62,15 @@ function TypingText()
       restartButtonRef.current.click();
       timerButtonRefs.current[2].blur();
     }
-    timerButtonRefs.current[0].addEventListener("click", timer15);
-    timerButtonRefs.current[1].addEventListener("click", timer30);
-    timerButtonRefs.current[2].addEventListener("click", timer60);
+    timerButtonRefs.current[0]?.addEventListener("click", timer15);
+    timerButtonRefs.current[1]?.addEventListener("click", timer30);
+    timerButtonRefs.current[2]?.addEventListener("click", timer60);
     
     return ()=>
     {
-      timerButtonRefs.current[0].removeEventListener("click", timer15);
-      timerButtonRefs.current[1].removeEventListener("click", timer30);
-      timerButtonRefs.current[2].removeEventListener("click", timer60);
+      timerButtonRefs.current[0]?.removeEventListener("click", timer15);
+      timerButtonRefs.current[1]?.removeEventListener("click", timer30);
+      timerButtonRefs.current[2]?.removeEventListener("click", timer60);
     }
   }, [timerButtonRefs])
 
@@ -199,11 +199,11 @@ function TypingText()
       resetLetterStyles();
       setStop(true);
     }
-    restartButtonRef.current.addEventListener("click", hadleResartButton);
+    restartButtonRef.current?.addEventListener("click", hadleResartButton);
 
     return () => 
     {
-      restartButtonRef.current.removeEventListener("click", hadleResartButton);
+      restartButtonRef.current?.removeEventListener("click", hadleResartButton);
     }
   }, [restartButtonRef]);
 
@@ -221,7 +221,7 @@ function TypingText()
   return (
     <>
 
-      <div style={{display:"flex", justifyContent:"center", alignItems:"center", paddingTop:"5em"}}>
+      <div style={{display:"flex", justifyContent:"center", alignItems:"center", marginTop:"10px"}}>
         <div className="changeTimer" style={{backgroundColor: "#2e343d"}}>
           <button className="changeTimerButtons" ref={r => (timerButtonRefs.current[0] = r)}>15</button>
           <button className="changeTimerButtons" ref={r => (timerButtonRefs.current[1] = r)}>30</button>
@@ -235,7 +235,7 @@ function TypingText()
         }
       } ref={cursorRef}></span>
 
-      <span  style={{color: "#f44c7f", fontSize : "2.5em", fontFamily: "monospace", paddingLeft: "3.5em", display: "block"}}>{timer}</span>
+      <span  style={{color: "#f44c7f", fontSize : "2.5em", fontFamily: "monospace", marginLeft: "8%", display: "block"}}>{timer}</span>
       
       <div ref = {textRef} className="textContainer">
         {

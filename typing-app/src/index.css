@@ -1,0 +1,88 @@
+.loginPageIcon
+{
+  color: #939eae;
+  margin-left: 20px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.loginPageIcon:hover
+{
+  color: white;
+}
+
+.homePageIcon
+{
+  margin-left: 6%;
+  color: white;
+  font-family: monospace;
+  font-size: 3em;
+  line-height: 1 ;
+  cursor: pointer;
+}
+
+.loginForm
+{
+  background-color: #2e343d;
+  border: 1px solid #333a45;
+  border-radius: 5px;
+  padding: 6px;
+  margin: auto;
+  margin-bottom: 5px;
+  align-self: center;
+  justify-content: center;
+  color: #939eae;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: monospace;
+}
+
+.loginForm:focus
+{
+  border: 1px solid white;
+  outline: none;
+}
+
+.loginButtons
+{
+  border-radius: 5px;
+  padding-left: 19px;
+  padding-right: 19px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: white;
+  font-size: 1.5em;
+  font-family: monospace;
+  text-align: center;
+  background-color: #2e343d;
+  border: 1px solid #333a45;
+  cursor: pointer;
+}
+
+.loginButtons:hover
+{
+  color: #2e343d;
+  background-color: #ffffffd7;
+}
+
+.typingTextContainer
+{
+  opacity: 1;
+  transition: opacity 0.25s ease-out;
+}
+
+.typingTextContainer.fade-out
+{
+  opacity: 0;
+}
+
+.loginPageContainer
+{
+  opacity: 1;
+  transition: opacity 0.25s ease-out;
+}
+
+.loginPageContainer.fade-out
+{
+  opacity: 0;
+}

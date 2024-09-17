@@ -47,8 +47,8 @@
 }
 .textContainer
 {
-  padding-left: 7em;
-  padding-right: 7em;
+  margin-left: 8%;
+  margin-right: 8%;
   display: block;
   position: relative;
 }
