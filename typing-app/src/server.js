@@ -22,7 +22,7 @@ app.use(express.static(path.join(__rootdir, 'dist')));
 //   allowedHeaders: 'Content-Type,Authorization'
 // }));
 
-const mongoURI = "mongodb+srv://sasankhvarma2003:za4T8un7Feu043XP@cluster0.wqosx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const mongoURI = "mongodb+srv://<username>:<password>@cluster0.wqosx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 const connectToDatabase = async () => {
   try {
